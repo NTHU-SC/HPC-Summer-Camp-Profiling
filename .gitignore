@@ -1,0 +1,11 @@
+gen
+mat_mul*
+!mat_mul*.c
+
+*.dat
+*.log
+*.html
+
+.vscode/
+aps*/
+vtune*/
