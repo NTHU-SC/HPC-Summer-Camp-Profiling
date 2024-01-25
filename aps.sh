@@ -1,9 +1,9 @@
 #!/bin/bash
-#PBS -P ACD110018
+#PBS -P ACD112218
 #PBS -N HPC-WinteCamp-Profiling
 #PBS -l select=1:ncpus=40:ompthreads=40  
 #PBS -l walltime=00:30:00
-#PBS -q ctest
+#PBS -q dc20240001
 #PBS -o aps-out.log
 #PBS -e aps-err.log
 
