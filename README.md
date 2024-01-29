@@ -8,7 +8,11 @@ git clone https://github.com/nevikw39/HPC-Winter-Camp-Profiling
 
 Please be advised that, in the code blocks of this document, you should replace the variables start with `$` (like `$RESULT_DIR`) on your own.
 
-## SSH X11 Forwarding
+## Before We Start
+
+For APS and VTune™, we need either X11 forwarding or copying data back.
+
+### SSH X11 Forwarding
 
 Allow you to open GUI application running remotely on local computer.
 
@@ -20,7 +24,6 @@ Prerequiste:
 Then, before establishing SSH connection, add `-X -Y` options or set `ForwardX11Trusted yes`, `ForwardX11 yes` in your SSH config.
 
 ```bash
-# Note the `-r` option and the `/' at the end of the path!!
 ssh -X -Y $USER@clogin1.twnia.nchc.org.tw
 # Use another login node
 ssh -X -Y $USER@clogin2.twnia.nchc.org.tw
@@ -34,6 +37,19 @@ xcalc
 xlogo
 xeyes
 ```
+
+### SSH Key for Data Transfer Nodes
+
+In addition to login nodes or computation nodes, Taiwania 1 has data transfer nodes (`xdata1`, `xdata2`) dedicated to uploading or downloading files or directories through SSH or SFTP.
+
+Thankfully, we are able to login to these data transfer nodes with SSH key only!!
+
+If you don't have a pair of SSH key, you could generate one now:
+```bash
+ssh-keygen
+```
+
+Then, store it to `~/.ssh/authorized_keys` on the machine you would like to login to.
 
 ## Set up Environments on Taiwania 1
 
