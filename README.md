@@ -1,7 +1,39 @@
 # 2024 HPC-AI Winter Camp @ NTHU & NCHC
 ## Brief Introduction to Intel® VTune™ Profilers
 
-Please be advised that, in the code blocks of this file, you should replace the variables start with `$` (like `$RESULT_DIR`) on your own.
+Clone this repo:
+```bash
+git clone https://github.com/nevikw39/HPC-Winter-Camp-Profiling
+```
+
+Please be advised that, in the code blocks of this document, you should replace the variables start with `$` (like `$RESULT_DIR`) on your own.
+
+## SSH X11 Forwarding
+
+Allow you to open GUI application running remotely on local computer.
+
+Prerequiste:
+- **Linux**: Noting to do if X11 desktop has been installed
+- **macOS**: Xquatrz is required
+- **Windows**: Enable WSLg with WSL 2, or use other X11 server like VcXsrv, Xming or one within MobaXTerm
+
+Then, before establishing SSH connection, add `-X -Y` options or set `ForwardX11Trusted yes`, `ForwardX11 yes` in your SSH config.
+
+```bash
+# Note the `-r` option and the `/' at the end of the path!!
+ssh -X -Y $USER@clogin1.twnia.nchc.org.tw
+# Use another login node
+ssh -X -Y $USER@clogin2.twnia.nchc.org.tw
+```
+
+To check whether that works, you could open some X11 apps:
+
+```bash
+xclock
+xcalc
+xlogo
+xeyes
+```
 
 ## Set up Environments on Taiwania 1
 
@@ -102,6 +134,8 @@ Otherwise, you could install [VTune™](https://www.intel.com/content/www/us/en/
 ```bash
 # Note the `-r` option and the `/' at the end of the path!!
 scp -r $USER@xdata1.twnia.nchc.org.tw:$PATH_TO_RESULT_DIR/ .
+# Use another data transfer node
+scp -r $USER@xdata2.twnia.nchc.org.tw:$PATH_TO_RESULT_DIR/ .
 ```
 
 Note that if you upload your public SSH key to Taiwania 1, you could transfer data with `xdata1`, `xdata2` nodes without OTP!!
