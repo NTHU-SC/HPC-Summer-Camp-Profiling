@@ -14,5 +14,5 @@ export LC_CTYPE=en_US
 cd ${PBS_O_WORKDIR:-"."}
 make
 
-aps -r aps_result ./mat_mul
+aps -r aps_result ./mat_mul_a
 aps-report aps_result -O aps_report.html
