@@ -1,6 +1,6 @@
-CC = icc
-CFLAGS = -O3 -g -fp-model strict -xCORE-AVX512 -qopenmp -qopt-report -std=c11 -mkl
-CXX = icpc
+CC = icx
+CFLAGS = -O3 -g -fp-model strict -xCORE-AVX512 -qopenmp -qopt-report -std=c11 -qmkl
+CXX = icpx
 CXXFLAGS = -std=c++17
 
 BINS = mat_mul_a mat_mul_b mat_mul_c

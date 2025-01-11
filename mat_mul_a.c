@@ -22,8 +22,8 @@ void mat_mul()
 int main()
 {
     FILE *fa = fopen("a.dat", "rb"), *fb = fopen("b.dat", "rb"), *fc = fopen("c.dat", "wb");
-    fread_unlocked(a, sizeof(float), sizeof a / sizeof(float), fa);
-    fread_unlocked(b, sizeof(float), sizeof b / sizeof(float), fb);
+    fread(a, sizeof(float), sizeof a / sizeof(float), fa);
+    fread(b, sizeof(float), sizeof b / sizeof(float), fb);
     fclose(fa);
     fclose(fb);
 
@@ -33,7 +33,7 @@ int main()
         mat_mul();
     }
 
-    fwrite_unlocked(c, sizeof(float), sizeof c / sizeof(float), fc);
+    fwrite(c, sizeof(float), sizeof c / sizeof(float), fc);
     fclose(fc);
 
     return 0;
