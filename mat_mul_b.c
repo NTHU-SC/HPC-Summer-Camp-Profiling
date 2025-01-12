@@ -6,14 +6,15 @@
 #define N 2048
 #endif // N
 #ifndef T
-#define T 64
+// #define T 64
+#define T 16
 #endif // T
 
 float a[N][N], b[N][N], c[N][N], cp[N][N];
 
 void mat_mul()
 {
-    #pragma omp parallel for
+    #pragma omp parallel for 
     for (int i = 0; i < N; i++)
         for (int k = 0; k < N; k++)
             for (int j = 0; j < N; j++)

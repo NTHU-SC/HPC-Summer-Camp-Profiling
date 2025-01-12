@@ -12,7 +12,7 @@ DATS = a.dat b.dat
 all: $(BINS)
 
 %: %.c | $(DATS)
-	$(CC) $< -o $@ $(CFLAGS)
+	$(CC) $< $(CFLAGS) -o $@
 
 $(DATS): | gen
 	./gen

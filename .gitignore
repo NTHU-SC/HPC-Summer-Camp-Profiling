@@ -9,3 +9,5 @@ mat_mul*
 .vscode/
 aps*/
 vtune*/
+*.err
+*.out

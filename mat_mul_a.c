@@ -5,7 +5,8 @@
 #define N 2048
 #endif // N
 #ifndef T
-#define T 64
+// #define T 64
+#define T 16
 #endif // T
 
 float a[N][N], b[N][N], c[N][N];
