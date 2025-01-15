@@ -31,7 +31,7 @@ ssh -X -Y $USER@f1-ilgn02.nchc.org.tw
 
 ## Set up Environments on Forerunner I
 
-Remember that there are 2 login nodes, `clogin1` (_clogin1.twnia.nchc.org.tw_ or _140.110.148.11_) and `clogin2` (_clogin2.twnia.nchc.org.tw_ or _140.110.148.12_)!!
+Remember that there are 2 login nodes, `f1-ilgn01` (_f1-ilgn01.nchc.org.tw_ or _140.110.122.196_) and `f1-ilgn02` (_f1-ilgn02.nchc.org.tw_ or _140.110.122.197_)!!
 
 ```bash
 # Load Intel Compiler
