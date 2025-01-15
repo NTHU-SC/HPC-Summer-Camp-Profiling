@@ -11,3 +11,6 @@ aps*/
 vtune*/
 *.err
 *.out
+r000hs/
+aps_result*/
+*.html

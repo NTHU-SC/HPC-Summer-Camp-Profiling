@@ -7,7 +7,7 @@
 #endif // N
 #ifndef T
 // #define T 64
-#define T 16
+#define T 64
 #endif // T
 
 float a[N][N], b[N][N], c[N][N], cp[N][N];

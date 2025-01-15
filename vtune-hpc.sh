@@ -1,17 +1,22 @@
 #!/bin/bash
-#PBS -P ACD112218
-#PBS -N HPC-WinteCamp-Profiling-VTune-hpc
-#PBS -l select=1:ncpus=40:ompthreads=40  
-#PBS -l walltime=00:30:00
-#PBS -q dc20240001
-#PBS -o vtune-hpc-out.log
-#PBS -e vtune-hpc-err.log
+#SBATCH --job-name=mat_mul
+#SBATCH --nodes=1
+#SBATCH --time=00:30:00
+#SBATCH --partition=hpcxai1
+#SBATCH --account=ACD114003
+#SBATCH --cpus-per-task=112
 
-module load intel/2019_u5
-. /pkg/intel/2019_u5/vtune_amplifier/amplxe-vars.sh 
+module load intel
+source /pkg/compiler/intel/2024/vtune/2024.0/vtune-vars.sh 
 export LC_CTYPE=en_US
 
-cd ${PBS_O_WORKDIR:-"."}
+make clean
 make
 
-amplxe-cl -collect hpc-performance -r vtune-hpc ./mat_mul_b
+export OMP_NUM_THREADS=112
+
+rm -r vtune-hpc-a
+rm -r vtune-hpc-b
+
+vtune -collect hpc-performance -r vtune-hpc-a ./mat_mul_a
+vtune -collect hpc-performance -r vtune-hpc-b ./mat_mul_b

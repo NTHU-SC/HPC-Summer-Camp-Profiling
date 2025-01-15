@@ -10,7 +10,7 @@
 #endif // N
 #ifndef T
 // #define T 64
-#define T 16
+#define T 64
 #endif // T
 #ifndef EPS
 #define EPS 5e-6f
