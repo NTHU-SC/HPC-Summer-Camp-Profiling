@@ -1,9 +1,9 @@
-# 2024 HPC-AI Winter Camp @ NTHU & NCHC
+# 2025 HPC-AI Winter Camp @ NTHU & NCHC
 ## Brief Introduction to Intel® VTune™ Profilers
 
 Clone this repo:
 ```bash
-git clone https://github.com/nevikw39/HPC-Winter-Camp-Profiling
+git clone https://github.com/NTHU-SC/HPC-Winter-Camp-Profiling
 ```
 
 Please be advised that, in the code blocks of this document, you should replace the variables start with `$` (like `$RESULT_DIR`) on your own.
@@ -24,42 +24,20 @@ Prerequiste:
 Then, before establishing SSH connection, add `-X -Y` options or set `ForwardX11Trusted yes`, `ForwardX11 yes` in your SSH config.
 
 ```bash
-ssh -X -Y $USER@clogin1.twnia.nchc.org.tw
+ssh -X -Y $USER@f1-ilgn01.nchc.org.tw
 # Use another login node
-ssh -X -Y $USER@clogin2.twnia.nchc.org.tw
+ssh -X -Y $USER@f1-ilgn02.nchc.org.tw
 ```
 
-To check whether that works, you could open some X11 apps:
-
-```bash
-xclock
-xcalc
-xlogo
-xeyes
-```
-
-### SSH Key for Data Transfer Nodes
-
-In addition to login nodes or computation nodes, Taiwania 1 has data transfer nodes (`xdata1`, `xdata2`) dedicated to uploading or downloading files or directories through SSH or SFTP.
-
-Thankfully, we are able to login to these data transfer nodes with SSH key only!!
-
-If you don't have a pair of SSH key, you could generate one now:
-```bash
-ssh-keygen
-```
-
-Then, store it to `~/.ssh/authorized_keys` on the machine you would like to login to.
-
-## Set up Environments on Taiwania 1
+## Set up Environments on Forerunner I
 
 Remember that there are 2 login nodes, `clogin1` (_clogin1.twnia.nchc.org.tw_ or _140.110.148.11_) and `clogin2` (_clogin2.twnia.nchc.org.tw_ or _140.110.148.12_)!!
 
 ```bash
 # Load Intel Compiler
-module load intel/2019_u5 
+module load intel/2022_3_1
 # ``Source'' VTune
-. /pkg/intel/2019_u5/vtune_amplifier/amplxe-vars.sh
+source /pkg/compiler/intel/2024/vtune/2024.0/vtune-vars.sh
 # Select locale
 export LC_CTYPE=en_US
 ```
@@ -78,12 +56,12 @@ aps --result-dir=$RESULT_DIR $APPLICATION $APPLICATION_PARAMETERS
 
 ### Convert Result to Report
 
-Then, we need obtain the analysis report (in HTML) based on the result data. By default, the report would also be named after date and time. It could be specified via `-O $REPORT_FILE` optionally.
+Then, we need obtain the analysis report (in HTML) based on the result data. By default, the report would also be named after date and time. It could be specified via `-H $REPORT_FILE` optionally.
 
 ```bash
 aps-report $RESULT_DIR
 # or
-aps-report $RESULT_DIR -O $REPORT_FILE
+aps-report $RESULT_DIR -H $REPORT_FILE
 ```
 
 ### Study the Report
@@ -103,14 +81,12 @@ firefox $REPORT_FILE
 Otherwise, you could download the HTML back to your own computer and open it. That could be done by VSCode, MobaXTerm or `scp`:
 
 ```bash
-scp $USER@xdata1.twnia.nchc.org.tw:$PATH_TO_REPORT_FILE .
+scp $USER@f1-dtn-vip.nchc.org.tw:$PATH_TO_REPORT_FILE .
 ```
-
-Note that if you upload your public SSH key to Taiwania 1, you could transfer data with `xdata1`, `xdata2` nodes without OTP!!
 
 #### Launch Simple Server and Port Forwarding
 
-Alternatively, you might launch a simple web server (like `python -m SimpleHTTPServer` or `python3 -m http.server`) on Taiwania 1. Nevertheless, there exists firewall blocking some traffic. So we should forward port with SSH. Choose a randome port or you would collide with others!!
+Alternatively, you might launch a simple web server (like `python -m SimpleHTTPServer` or `python3 -m http.server`) on Forerunner I. Nevertheless, there exists firewall blocking some traffic. So we should forward port with SSH. Choose a randome port or you would collide with others!!
 
 ## Intel® VTune™ Amplifier
 
@@ -128,7 +104,7 @@ Common available collect options:
 - I/O (`io`)
 
 ```bash
-amplxe-cl -collect $COLLECT_OPTION -r $RESULT_DIR $APPLICATION $APPLICATION_PARAMETERS
+vtune -collect $COLLECT_OPTION -r $RESULT_DIR $APPLICATION $APPLICATION_PARAMETERS
 ```
 
 ### View the Report
@@ -140,7 +116,7 @@ Similarly, there are also 3 approaches to open the reports.
 Again, if X11 Forwarding have been set properly, we could start the GUI:
 
 ```bash
-amplxe-gui $RESULT_DIR
+vtune-gui $RESULT_DIR
 ```
 
 #### Install VTune™ Locally & Copy Report Back to Local
@@ -149,13 +125,5 @@ Otherwise, you could install [VTune™](https://www.intel.com/content/www/us/en/
 
 ```bash
 # Note the `-r` option and the `/' at the end of the path!!
-scp -r $USER@xdata1.twnia.nchc.org.tw:$PATH_TO_RESULT_DIR/ .
-# Use another data transfer node
-scp -r $USER@xdata2.twnia.nchc.org.tw:$PATH_TO_RESULT_DIR/ .
+scp -r $USER@f1-dtn-vip.nchc.org.tw:$PATH_TO_RESULT_DIR/ .
 ```
-
-Note that if you upload your public SSH key to Taiwania 1, you could transfer data with `xdata1`, `xdata2` nodes without OTP!!
-
-#### Launch Backend and Port Forwarding
-
-Alternatively, Intel® provides VTune™ backend (`amplxe-backend` or `vtune-backend`) which works just like a web server. We could lauch it on Taiwania 1. Again, due to the firewall, we should forward port with SSH.
