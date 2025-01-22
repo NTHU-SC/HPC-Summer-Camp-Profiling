@@ -13,6 +13,8 @@ export LC_CTYPE=en_US
 make clean
 make
 
+./gen
+
 export OMP_NUM_THREADS=112
 
 time ./mat_mul_a
