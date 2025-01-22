@@ -6,7 +6,7 @@
 #SBATCH --account=ACD114003
 #SBATCH --cpus-per-task=112
 
-module load intel
+module load intel/2022_3_1
 source /pkg/compiler/intel/2024/vtune/2024.0/vtune-vars.sh 
 export LC_CTYPE=en_US
 
