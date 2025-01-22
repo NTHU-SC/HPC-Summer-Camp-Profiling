@@ -13,6 +13,8 @@ export LC_CTYPE=en_US
 make clean
 make
 
+./gen
+
 time ./mat_mul_a
 time ./mat_mul_b
 time ./mat_mul_c
