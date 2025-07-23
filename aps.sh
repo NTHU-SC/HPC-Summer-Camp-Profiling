@@ -2,7 +2,7 @@
 #SBATCH --job-name=mat_mul
 #SBATCH --nodes=1
 #SBATCH --time=00:30:00
-#SBATCH --partition=ct112
+#SBATCH --partition=development
 #SBATCH --account=ACD114003
 #SBATCH --cpus-per-task=112
 
