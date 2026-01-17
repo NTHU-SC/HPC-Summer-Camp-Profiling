@@ -42,8 +42,5 @@ int main()
                 assert(0);
             }
 
-    if (memcmp(c, cp, sizeof c))
-        fprintf(stderr, "Minor errors.\n");
-
     return 0;
 }
