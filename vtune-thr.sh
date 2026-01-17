@@ -3,7 +3,7 @@
 #SBATCH --nodes=1
 #SBATCH --time=00:30:00
 #SBATCH --partition=ct112
-#SBATCH --account=ACD114003
+#SBATCH --account=GOV115003
 #SBATCH --cpus-per-task=112
 
 module load intel/2022_3_1
@@ -13,7 +13,8 @@ export LC_CTYPE=en_US
 make clean
 make
 
+# TODO 3 : Modify this to find out the best OMP_NUM_THREADS for this program
 export OMP_NUM_THREADS=112
-rm -r vtune-thr
+rm -rf vtune-thr
 
 vtune -collect threading -r vtune-thr ./mat_mul_c

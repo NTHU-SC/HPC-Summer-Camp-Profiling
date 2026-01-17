@@ -3,7 +3,7 @@
 #SBATCH --nodes=1
 #SBATCH --time=00:30:00
 #SBATCH --partition=ct112
-#SBATCH --account=ACD114003
+#SBATCH --account=GOV115003
 #SBATCH --cpus-per-task=112
 
 module load intel/2022_3_1
@@ -15,6 +15,6 @@ make
 
 
 export OMP_NUM_THREADS=112
-rm -r vtune-hs-a
+rm -rf vtune-hs-a
 
 vtune -collect hotspots -r vtune-hs-a ./mat_mul_a

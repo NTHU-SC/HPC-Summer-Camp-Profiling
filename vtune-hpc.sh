@@ -3,7 +3,7 @@
 #SBATCH --nodes=1
 #SBATCH --time=00:30:00
 #SBATCH --partition=ct112
-#SBATCH --account=ACD114003
+#SBATCH --account=GOV115003
 #SBATCH --cpus-per-task=112
 
 module load intel/2022_3_1
@@ -15,8 +15,9 @@ make
 
 export OMP_NUM_THREADS=112
 
-rm -r vtune-hpc-a
-rm -r vtune-hpc-b
+rm -rf vtune-hpc-a
+rm -rf vtune-hpc-b
+rm -rf vtune-hpc-c
 
-vtune -collect hpc-performance -r vtune-hpc-a ./mat_mul_a
-vtune -collect hpc-performance -r vtune-hpc-b ./mat_mul_b
+# TODO 2 : Try to modify the hotspot command to the vtune command that collect "hpc-performance" and save the result to vtune-hpc-a / -b / -c
+# hotspots : vtune -collect hotspots -r vtune-hs-a ./mat_mul_a

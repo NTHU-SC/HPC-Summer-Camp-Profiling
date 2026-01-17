@@ -1,4 +1,4 @@
-# 2025 HPC-AI Winter Camp @ NTHU & NCHC
+# 2026 HPC-AI Winter Camp @ NTHU & NCHC
 ## Brief Introduction to Intel® VTune™ Profilers
 
 Clone this repo:

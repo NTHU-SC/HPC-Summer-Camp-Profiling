@@ -1,9 +1,9 @@
 #!/bin/bash
-#SBATCH --job-name=mat_mul
+#SBATCH --job-name=mat_mul_aps
 #SBATCH --nodes=1
 #SBATCH --time=00:30:00
 #SBATCH --partition=ct112
-#SBATCH --account=ACD114003
+#SBATCH --account=GOV115003
 #SBATCH --cpus-per-task=112
 
 module load intel/2022_3_1
@@ -21,9 +21,9 @@ time ./mat_mul_a
 time ./mat_mul_b
 time ./mat_mul_c
 
-rm -r aps_result-a
-rm -r aps_result-b
-rm -r aps_result-c
+rm -rf aps_result-a
+rm -rf aps_result-b
+rm -rf aps_result-c
 
 aps -r aps_result-a ./mat_mul_a
 aps-report aps_result-a -H aps_report-a.html
